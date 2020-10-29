@@ -7,6 +7,8 @@ logging.basicConfig(level=logging.DEBUG)
 logg = logging.getLogger()
 
 
+# m = ceil((n * log(p)) / log(1 / pow(2, log(2))));
+
 class BloomFilter:
 
     def __init__(self, bits, rounds):
@@ -16,7 +18,11 @@ class BloomFilter:
             raise ValueError('Need byte boundary bit value')
         self.rounds = rounds
         self.filter = numpy.zeros(self.bytes, dtype=numpy.uint8)
-        self.hasher = self.__hash
+        self.hasher = self.set_hasher(self.__hash)
+
+
+    def set_hasher(self, hasher):
+        self.hasher = hasher
 
 
     def add(self, b):
