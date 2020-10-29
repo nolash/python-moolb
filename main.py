@@ -18,13 +18,13 @@ class BloomFilter:
         self.filter = numpy.zeros(self.bytes, dtype=numpy.uint8)
 
 
-    def add(self, s):
+    def add(self, b):
         for i in range(self.rounds):
             salt = str(i)
             salt_str = salt.encode('utf-8')
-            logg.debug('hashing {} {}'.format(s, salt))
+            logg.debug('hashing {} {}'.format(b.hex(), salt))
             h = hashlib.sha256()
-            h.update(s.encode('utf-8'))
+            h.update(b)
             h.update(salt_str)
             z = h.digest()
             r = int.from_bytes(z, byteorder='big')
@@ -36,5 +36,8 @@ class BloomFilter:
         return m
 
 
+    def check(self, s):
+
+
 f = BloomFilter(8192 * 8, 3)
-f.add('1024')
+f.add(b'1024')
