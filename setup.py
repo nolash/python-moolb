@@ -15,6 +15,7 @@ setup(
         long_description_content_type='text/markdown',
         install_requires=[
             'numpy>=1.19.0',
+            ],
         packages=[
             'moolb',
         ],
