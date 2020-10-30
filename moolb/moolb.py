@@ -9,16 +9,19 @@ logg = logging.getLogger()
 
 # m = ceil((n * log(p)) / log(1 / pow(2, log(2))));
 
-class BloomFilter:
+class Bloom:
 
-    def __init__(self, bits, rounds):
+    def __init__(self, bits, rounds, hasher=None):
         self.bits = bits
         self.bytes = int(bits / 8)
         if self.bytes * 8 != self.bits:
             raise ValueError('Need byte boundary bit value')
         self.rounds = rounds
         self.filter = numpy.zeros(self.bytes, dtype=numpy.uint8)
-        self.hasher = self.set_hasher(self.__hash)
+        if hasher == None:
+            logg.info('using default hasher (SHA256)')
+            hasher = self.__hash
+        self.hasher = self.set_hasher(hasher)
 
 
     def set_hasher(self, hasher):
@@ -59,10 +62,3 @@ class BloomFilter:
        h.update(b)
        h.update(s)
        return h.digest()
-
-
-
-f = BloomFilter(8192 * 8, 3)
-f.add(b'1024')
-print(f.check(b'1024'))
-print(f.check(b'1023'))
