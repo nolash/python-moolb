@@ -1,0 +1,5 @@
+- 0.0.2
+	* Add numpy to deps
+- 0.0.1
+	* Add and check
+	* Make hash backend pluggable

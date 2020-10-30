@@ -1,7 +1,8 @@
-import numpy
 import hashlib
 import logging
 import math
+
+import numpy
 
 logging.basicConfig(level=logging.DEBUG)
 logg = logging.getLogger()
