@@ -2,13 +2,11 @@ import hashlib
 import logging
 import math
 
-import numpy
-
 logging.basicConfig(level=logging.DEBUG)
 logg = logging.getLogger()
 
-
 # m = ceil((n * log(p)) / log(1 / pow(2, log(2))));
+
 
 class Bloom:
 
@@ -18,7 +16,7 @@ class Bloom:
         if self.bytes * 8 != self.bits:
             raise ValueError('Need byte boundary bit value')
         self.rounds = rounds
-        self.filter = numpy.zeros(self.bytes, dtype=numpy.uint8)
+        self.filter = [0] * self.bytes
         if hasher == None:
             logg.info('using default hasher (SHA256)')
             hasher = self.__hash
@@ -55,6 +53,10 @@ class Bloom:
             if not self.filter[bytepos] & 1 << bitpos:
                 return False
             return True
+
+
+    def dump(self):
+        return self.filter
 
 
     def __hash(self, b, s):
