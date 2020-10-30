@@ -29,9 +29,11 @@ class Bloom:
 
     def add(self, b):
         for i in range(self.rounds):
-            salt = str(i)
-            s = salt.encode('utf-8')
+            #salt = str(i)
+            #s = salt.encode('utf-8')
+            s = i.to_bytes(4, byteorder='big')
             z = self.__hash(b, s)
+            logg.debug('result {}'.format(z.hex()))
             r = int.from_bytes(z, byteorder='big')
             m = r % self.bits
             bytepos = math.floor(m / 8)
@@ -43,8 +45,9 @@ class Bloom:
 
     def check(self, b):
         for i in range(self.rounds):
-            salt = str(i)
-            s = salt.encode('utf-8')
+            #salt = str(i)
+            #s = salt.encode('utf-8')
+            s = i.to_bytes(4, byteorder='big')
             z = self.__hash(b, s)
             r = int.from_bytes(z, byteorder='big')
             m = r % self.bits
