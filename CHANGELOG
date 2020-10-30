@@ -1,3 +1,5 @@
+- 0.0.4
+	* Make dump return bytestring
 - 0.0.3
 	* Remove numpy dependency
 	* Add dump method

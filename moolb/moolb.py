@@ -55,8 +55,8 @@ class Bloom:
             return True
 
 
-    def dump(self):
-        return self.filter
+    def to_bytes(self):
+        return bytes(self.filter)
 
 
     def __hash(self, b, s):

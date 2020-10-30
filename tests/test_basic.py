@@ -1,7 +1,11 @@
 import unittest
 import hashlib
+import logging
 
 from moolb import Bloom
+
+logging.basicConfig(level=logging.DEBUG)
+logg = logging.getLogger()
 
 
 def hashround(self, b, s):
@@ -27,6 +31,10 @@ class Test(unittest.TestCase):
         self.assertTrue(f.check(b'1024'))
         self.assertFalse(f.check(b'1023'))
 
+#    def test_dump(self):
+#        f = Bloom(8192 * 8, 3)
+#        f.add(b'1024')
+#        logg.debug(f.to_bytes().hex())
 
 if __name__ == '__main__':
     unittest.main()
