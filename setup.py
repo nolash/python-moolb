@@ -6,7 +6,7 @@ f.close()
 
 setup(
         name='moolb',
-        version='0.1.0',
+        version='0.1.1b1',
         description='Simple bloom filter with pluggable hash backend',
         author='Louis Holbrook',
         author_email='dev@holbrook.no',

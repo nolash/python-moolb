@@ -10,17 +10,33 @@ logg = logging.getLogger()
 
 class Bloom:
 
-    def __init__(self, bits, rounds, hasher=None):
+    def __init__(self, bits, rounds, hasher=None, default_data=None):
         self.bits = bits
         self.bytes = int(bits / 8)
         if self.bytes * 8 != self.bits:
             raise ValueError('Need byte boundary bit value')
         self.rounds = rounds
-        self.filter = [0] * self.bytes
         if hasher == None:
             logg.info('using default hasher (SHA256)')
             hasher = self.__hash
         self.hasher = self.set_hasher(hasher)
+
+        self.filter = None
+        if default_data != None:
+            self.merge(default_data)
+        else:
+            self.filter = [0] * self.bytes
+
+
+    def merge(self, filter_data):
+        datalen = len(filter_data)
+        if datalen != self.bytes:
+            raise ValueError('expected byte array bit size {}, got {}'.format(self.bits, datalen * 8))
+
+        if self.filter == None:
+            self.filter = filter_data
+        else:
+            self.filter = list(map(lambda x, y: x | y, filter_data, self.filter))
 
 
     def set_hasher(self, hasher):
