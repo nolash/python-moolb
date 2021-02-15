@@ -17,7 +17,7 @@ class Bloom:
             raise ValueError('Need byte boundary bit value')
         self.rounds = rounds
         if hasher == None:
-            logg.info('using default hasher (SHA256)')
+            logg.debug('moolb using default hasher (SHA256)')
             hasher = self.__hash
         self.hasher = self.set_hasher(hasher)
 
@@ -49,13 +49,11 @@ class Bloom:
             #s = salt.encode('utf-8')
             s = i.to_bytes(4, byteorder='big')
             z = self.__hash(b, s)
-            logg.debug('result {}'.format(z.hex()))
             r = int.from_bytes(z, byteorder='big')
             m = r % self.bits
             bytepos = math.floor(m / 8)
             bitpos = m % 8
             self.filter[bytepos] |= 1 << bitpos
-            logg.debug('foo {} {}'.format(bytepos, bitpos))
         return m
 
 
@@ -79,7 +77,6 @@ class Bloom:
 
 
     def __hash(self, b, s):
-       logg.debug('hashing {} {}'.format(b.hex(), s.hex()))
        h = hashlib.sha256()
        h.update(b)
        h.update(s)
