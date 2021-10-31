@@ -2,8 +2,7 @@ import hashlib
 import logging
 import math
 
-logging.basicConfig(level=logging.DEBUG)
-logg = logging.getLogger()
+logg = logging.getLogger(__name__)
 
 # m = ceil((n * log(p)) / log(1 / pow(2, log(2))));
 
