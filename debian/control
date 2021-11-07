@@ -1,0 +1,12 @@
+Source: moolb
+Section: python
+Priority: optional
+Maintainer: Louis Holbrook <dev@holbrook.no>
+Build-Depends: debhelper (>= 9), python3-setuptools
+Standards-Version: 3.9.5
+
+Package: moolb
+Architecture: any
+Pre-Depends: dpkg, python3 (>= 3.7)
+Depends: make
+Description: Simple bloom filter with pluggable hash backend

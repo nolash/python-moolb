@@ -1,0 +1,5 @@
+moolb (0.2.0) UNRELEASED; urgency=low
+
+  * Initial deb packaging
+
+ -- Louis Holbrook <dev@holbrook.no>  Sun, 07 Nov 2021 12:06:03 +0200
